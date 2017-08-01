@@ -13,6 +13,9 @@ Vagrant.configure(2) do |config|
       node.vm.provider "virtualbox" do |v|
         v.memory = i == 1 ? 1536 : 512
       end
+      
+      node.vm.provision "shell",
+        inline: i == 1 ? "sudo /vagrant/bootstrap -m https://l2ohopf9.mirror.aliyuncs.com -r docker.io/laincloud --vip=192.168.77.201" : ""     
 
       node.vm.network "private_network", ip: "192.168.77.2#{i}"
 
@@ -21,3 +24,4 @@ Vagrant.configure(2) do |config|
   end
 
 end
+
